@@ -42,6 +42,22 @@ Metrics-Analyzer analyze app-companies app-financial-metrics
 - `./Metrics-Analyzer/Processors` bunch of data processors.
 - `./Metrics-Analyzer/Program.cs` entry point into the app.
 
+# Q / A
+
+> How long did you spend working on the problem? What was the most challenging part for you to
+solve?
+
+Three hours for the exact problem solving. Rest of the time I spent to make everything pretty. Such as: console output, README file, create builds for different platforms.
+
+> How would you modify your data model to account for new risk signals that could be added to
+improve accuracy of determining credit risk?
+
+My data model is easily scalable for new parameters. It has two layers of models. The first one represents CSV format data. Another one represents data model that are more efficient for runtime calculation and has a bit different format. So to add a new fields into a model I will need to add in multiple places. Also, into a `DataParser.cs` that is responsible for data conversion between CSV and Runtime models.
+
+> Discuss your solution’s runtime complexity.
+
+Just because I convert CSV data to my Runtime data model that has much more efficient format for runtime performance. The complexity for exact data processing is `O(N)`. The data conversion takes another one `O(N)`, but I am not sure it should be calculated, because the conversion could be recognized as part of data reading, which one is not included in complecity calculation as I know. The most time consuming part of this app is `printing data to a console` in pretty tree formated way.
+
 ## GPT - Metrics Analyzer app icon
 
 ![app-icon](https://github.com/IvanMurzak/Metrics-Analyzer/assets/9135028/77dcbc3c-16be-4d3e-a450-8e8fa85d35ad)
