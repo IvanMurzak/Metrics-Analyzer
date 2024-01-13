@@ -18,12 +18,12 @@ class Program
         MAConsole.MALogo();
 
         Initialize();
-        _logger.Info("Use [cyan]-h[/] or [cyan]--help[/] command to see all available commands");
 
         var rootCommand = BuildCommands();
 
         if (args.Length == 0) // console mode
         {
+            _logger.Info("Use [cyan]-h[/] or [cyan]--help[/] command to see all available commands");
             while (true)
             {
                 AnsiConsole.Markup("[red] > [/]");
@@ -76,7 +76,7 @@ class Program
     static RootCommand BuildCommands()
     {
         return (RootCommand)new RootCommand("Metrics Analyzer tool.")
-            .FactoryAdd(new CommandTest("Process local .csv files"));
+            .FactoryAdd(new CommandAnalyze("Process local .csv files"));
     }
     static async Task InvokeCommand(Func<Task<int>> invoke, bool exit = true)
     {
