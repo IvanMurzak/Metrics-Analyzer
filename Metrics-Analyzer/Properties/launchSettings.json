@@ -1,8 +1,12 @@
 {
     "profiles": {
-        "test": {
+        "analyze-1": {
             "commandName": "Project",
-            "commandLineArgs": "test"
+            "commandLineArgs": "analyze app-companies app-financial-metrics"
+        },
+        "analyze-2": {
+            "commandName": "Project",
+            "commandLineArgs": "analyze example-app-companies example-app-financial-metrics"
         },
         "EMPTY": {
             "commandName": "Project",
