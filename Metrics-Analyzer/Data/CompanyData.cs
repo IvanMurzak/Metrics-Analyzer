@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Metrics_Analyzer.Data;
 
-namespace Metrics_Analyzer.Data
+internal class CompanyData
 {
-    internal class CompanyData
-    {
-        public string Id { private set; get; }
-        public List<AppData> apps { private set; get; } = new();
+    public int Id { private set; get; }
+    public string Name { private set; get; }
+    public string CountryCode { private set; get; }
+    public Dictionary<string, AppData> apps { private set; get; }
 
-        public static List<CompanyData>
+    public CompanyData(int id, string name, string countryCode, List<AppData> apps)
+    {
+        Id = id;
+        Name = name;
+        CountryCode = countryCode;
+        this.apps = apps.ToDictionary(x => x.Name);
     }
 }

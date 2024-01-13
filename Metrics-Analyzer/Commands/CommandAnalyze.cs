@@ -27,21 +27,7 @@ namespace Metrics_Analyzer.Commands
 
                     try
                     {
-                        var companies = CSV_Company.Parse(fileNameCompanies);
-                        var metrics = CSV_AppMetrics.Parse(fileNameMetrics);
-
-                        if (companies.Count == 0)
-                        {
-                            _logger.Error($"No comapnies found. Abort.");
-                            context.ExitCode = 1;
-                            return;
-                        }
-                        if (metrics.Count == 0)
-                        {
-                            _logger.Error($"No metrices found. Abort.");
-                            context.ExitCode = 1;
-                            return;
-                        }
+                        
 
 
 

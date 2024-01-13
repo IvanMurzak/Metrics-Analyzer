@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Metrics_Analyzer.Data;
 
-namespace Metrics_Analyzer.Data
+internal class AppData
 {
-    internal class AppData
+    public string Name { private set; get; }
+    public List<AppTimestampData> Timestamps { private set; get; }
+
+    public AppData(string name, List<AppTimestampData> timestamps)
     {
+        Name = name;
+        Timestamps = timestamps;
     }
 }
