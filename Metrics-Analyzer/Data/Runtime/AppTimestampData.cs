@@ -2,7 +2,7 @@
 
 namespace Metrics_Analyzer.Data.Runtime;
 
-public class AppTimestampData
+internal class AppTimestampData
 {
     public DateTime Date { private set; get; }
     public double Revenue { private set; get; }

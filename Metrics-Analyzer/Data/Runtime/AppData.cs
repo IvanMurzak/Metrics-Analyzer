@@ -2,7 +2,7 @@
 
 namespace Metrics_Analyzer.Data.Runtime;
 
-public class AppData
+internal class AppData
 {
     public int CompanyId { private set; get; }
     public string CompanyName { private set; get; }

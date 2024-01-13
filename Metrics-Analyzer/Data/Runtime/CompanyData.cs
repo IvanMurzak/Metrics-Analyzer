@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Metrics_Analyzer.Data.Runtime;
 
-public class CompanyData
+internal class CompanyData
 {
     public int Id { private set; get; }
     public string Name { private set; get; }
