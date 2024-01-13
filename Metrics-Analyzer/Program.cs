@@ -7,7 +7,6 @@ using Metrics_Analyzer.Console;
 using Metrics_Analyzer.Commands;
 using Metrics_Analyzer.Console.Extensions;
 using System.Threading.Tasks;
-using System.IO;
 
 class Program
 {
@@ -17,8 +16,6 @@ class Program
     static void Main(string[] args)
     {
         MAConsole.MALogo();
-
-        Initialize();
 
         var rootCommand = BuildCommands();
 
@@ -60,19 +57,6 @@ class Program
                 exit: true
             )).Wait();
         }
-    }
-    static void Initialize()
-    {
-        AnsiConsole.Status().Start("Initializing...", ctx =>
-        {
-            TimeTracker.Do("Initialized", () =>
-            {
-                // JsonUtilityEx.Init();
-
-                // Application.EnableVisualStyles();
-                // Application.SetCompatibleTextRenderingDefault(false);
-            }).Print();
-        });
     }
     static RootCommand BuildCommands()
     {
