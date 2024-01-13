@@ -37,9 +37,9 @@ Metrics-Analyzer analyze app-companies app-financial-metrics
 
 - `./Metrics-Analyzer/Commands` console commands, these classes will be executed as only a user uses a related command.
 - `./Metrics-Analyzer/Console` helpful classes for beautiful printing to a console.
-- `./Metrics-Analyzer/Data` models that the app uses in runtime for processing data in a more efficient way.
 - `./Metrics-Analyzer/Data/CSV` models that represent CSV files.
-- `./Metrics-Analyzer/Processors` bunch of data processors.
+- `./Metrics-Analyzer/Data/Runtime` models for runtime calculations. They are optimized to allow faster calculations.
+- `./Metrics-Analyzer/Processors` contains all data processors of the project. Each specific processor contains nested class that represents data model for it's processing result.
 - `./Metrics-Analyzer/Program.cs` entry point into the app.
 
 # Q / A
@@ -49,14 +49,24 @@ solve?
 
 Three hours for the exact problem solving. Rest of the time I spent to make everything pretty. Such as: console output, README file, create builds for different platforms.
 
+---
+
 > How would you modify your data model to account for new risk signals that could be added to
 improve accuracy of determining credit risk?
 
-My data model is easily scalable for new parameters. It has two layers of models. The first one represents CSV format data. Another one represents data model that are more efficient for runtime calculation and has a bit different format. So to add a new fields into a model I will need to add in multiple places. Also, into a `DataParser.cs` that is responsible for data conversion between CSV and Runtime models.
+My data model is easily scalable for new parameters. I made `AppProcessor.Const.cs` that contains all constants and ranges for calculations. It could be easily updated as well. 
+
+The project has two layers of models. The first one represents CSV format data. Another one represents data model that are more efficient for runtime calculation and has a bit different format. So to add a new fields into a model I will need to add in multiple places. Also, into a `DataParser.cs` that is responsible for data conversion between CSV and Runtime models.
+
+---
 
 > Discuss your solution’s runtime complexity.
 
+The processing functions is here `AppProcessor.cs` line 25.
+
 Just because I convert CSV data to my Runtime data model that has much more efficient format for runtime performance. The complexity for exact data processing is `O(N)`. The data conversion takes another one `O(N)`, but I am not sure it should be calculated, because the conversion could be recognized as part of data reading, which one is not included in complecity calculation as I know. The most time consuming part of this app is `printing data to a console` in pretty tree formated way.
+
+If I had more time I would implement multithreaded solution that may increase perfromance for bigger data sets. Also, I would implement streaming data processing. That would reduce memory consumption. Because right now an entire data set should be loaded, processed, converted into result format and unloaded. That is a lot of RAM.
 
 ## GPT - Metrics Analyzer app icon
 
