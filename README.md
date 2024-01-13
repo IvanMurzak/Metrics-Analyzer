@@ -10,28 +10,35 @@ Demo project. This is the solution for this [task](https://github.com/IvanMurzak
 
 ### [GitHub link](https://github.com/IvanMurzak/Metrics-Analyzer).
 
-## Requirements
+# Get started
 
-- 👉 [Install](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) `.NET 8.0 Runtime`
+Depending on your operation system unpack and open a related folder. Make sure `.csv` files are in the same folder as the app file.
 
-
-## Get started
-
- - Depending on your operation system open a related folder.
+### Windows
  - Double click on the app file `Metrics-Analyzer`
- - Type command and press enter (make sure `.csv` files are in the same folder as the app file)
+ - Type command and press enter
  
- ```
- analyze app-companies app-financial-metrics
- ```
+```
+analyze app-companies app-financial-metrics
+```
+
+### MacOS
+ - Open Terminal and run the command `chmod +x Metrics-Analyzer`
+ - Double click on the app file `Metrics-Analyzer`
+ - Type command and press enter
+ 
+```
+analyze app-companies app-financial-metrics
+```
+
+---
 
 You may use `-h` or `--help` command to get a description of the command line interface.
 Also, you may run this app through a standard terminal with adding arguments. Example:
 
 ```
-Metrics-Analyzer analyze app-companies app-financial-metrics
+./Metrics-Analyzer analyze app-companies app-financial-metrics
 ```
-
 
 # Project structure
 
