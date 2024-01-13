@@ -1,4 +1,6 @@
-﻿namespace Metrics_Analyzer.Processors
+﻿using System.Collections.Generic;
+
+namespace Metrics_Analyzer.Processors
 {
     static partial class AppProcessor
     {

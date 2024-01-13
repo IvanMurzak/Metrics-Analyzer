@@ -6,10 +6,11 @@ using NLog;
 using Metrics_Analyzer.Console;
 using Metrics_Analyzer.Commands;
 using Metrics_Analyzer.Console.Extensions;
+using System.Threading.Tasks;
+using System.IO;
 
 class Program
 {
-    public static readonly string EnvironmentPath = Directory.GetCurrentDirectory() + "\\data";
     private static readonly ILogger _logger = LogManager.GetCurrentClassLogger();
 
     [STAThread]
@@ -98,13 +99,5 @@ class Program
             _logger.Fatal(e);
             if (exit) Environment.Exit(1);
         }
-    }
-    public static string GetPath(string path)
-    {
-        if (path[0] == '.') path = path.Substring(1);
-        if (path[0] == '/' || path[0] == '\\')
-            return $"{EnvironmentPath}{path}";
-        else
-            return $"{EnvironmentPath}\\{path}";
     }
 }

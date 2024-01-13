@@ -1,4 +1,6 @@
-﻿namespace Metrics_Analyzer.Data.CSV
+﻿using System;
+
+namespace Metrics_Analyzer.Data.CSV
 {
     static internal class CSVUtils
     {

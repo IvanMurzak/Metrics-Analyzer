@@ -1,4 +1,7 @@
-﻿namespace Metrics_Analyzer.Data;
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace Metrics_Analyzer.Data;
 
 public class CompanyData
 {

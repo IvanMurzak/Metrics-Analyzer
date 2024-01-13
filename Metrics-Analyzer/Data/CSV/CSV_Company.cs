@@ -1,4 +1,8 @@
-﻿namespace Metrics_Analyzer.Data.CSV;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
+namespace Metrics_Analyzer.Data.CSV;
 
 internal class CSV_Company
 {

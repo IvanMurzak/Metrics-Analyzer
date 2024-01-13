@@ -1,4 +1,6 @@
-﻿namespace Metrics_Analyzer.Data;
+﻿using System;
+
+namespace Metrics_Analyzer.Data;
 
 public class AppTimestampData
 {

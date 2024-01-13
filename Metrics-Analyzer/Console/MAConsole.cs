@@ -1,6 +1,7 @@
 ﻿using NLog;
 using NLog.Config;
 using Spectre.Console;
+using System.Threading.Tasks;
 
 namespace Metrics_Analyzer.Console;
 

@@ -1,4 +1,7 @@
 ﻿using Metrics_Analyzer.Data;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Metrics_Analyzer.Processors
 {

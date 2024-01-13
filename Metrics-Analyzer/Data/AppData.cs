@@ -1,4 +1,6 @@
-﻿namespace Metrics_Analyzer.Data;
+﻿using System.Collections.Generic;
+
+namespace Metrics_Analyzer.Data;
 
 public class AppData
 {
