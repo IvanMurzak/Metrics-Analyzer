@@ -67,8 +67,8 @@ namespace Metrics_Analyzer.Commands
                                     treeApp.AddNode($"[skyblue2]Payback[/] ----- [green]{app.PaybackDays} days[/]. [gray]Happened at {app.firstPayback.Value.ToShortDateString()}[/]");
                                 }
 
-                                treeApp.AddNode($"[skyblue2]Risk rating[/] - [green]{app.RiskRating}[/] - [gray]{app.RiskRatingTitle}[/]");
-                                treeApp.AddNode($"[skyblue2]Risk score[/] -- [green]{app.RiskScore}[/]");
+                                treeApp.AddNode($"[skyblue2]Risk rating[/] - [green]{app.riskRating}[/] - [gray]{app.riskTitle}[/]");
+                                treeApp.AddNode($"[skyblue2]Risk score[/] -- [green]{app.riskScore}[/]");
                             }
                             AnsiConsole.Write(tree);
                             AnsiConsole.WriteLine();

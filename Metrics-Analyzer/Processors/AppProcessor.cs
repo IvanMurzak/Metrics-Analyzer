@@ -17,27 +17,42 @@ namespace Metrics_Analyzer.Processors
                 {
                     id = company.Id,
                     name = company.Name,
-                    apps = company.apps.Values.Select(app =>
-                    {
-                        var appResult = new AppResult()
-                        {
-                            publishDate = app.Timestamps[0].Date,
-                            name = app.Name
-                        };
-                        foreach (var timestamp in app.Timestamps)
-                        {
-                            appResult.LTV += timestamp.Revenue;
-                            appResult.CAC += timestamp.MarketingSpend;
-
-                            if (appResult.firstPayback == null && appResult.LTV >= appResult.CAC)
-                            {
-                                appResult.firstPayback = timestamp.Date;
-                            }
-                        }
-                        return appResult;
-                    }).ToList()
+                    apps = company.apps.Values
+                        .Select(app => app.ProcessApp())
+                        .ToList()
                 };
             }).ToList();
+        }
+
+        static AppResult ProcessApp(this AppData appData)
+        {
+            var appResult = new AppResult()
+            {
+                publishDate = appData.Timestamps[0].Date,
+                name = appData.Name
+            };
+            foreach (var timestamp in appData.Timestamps)
+            {
+                appResult.LTV += timestamp.Revenue;
+                appResult.CAC += timestamp.MarketingSpend;
+
+                if (appResult.firstPayback == null && appResult.LTV >= appResult.CAC)
+                {
+                    appResult.firstPayback = timestamp.Date;
+                }
+            }
+
+            var paybackValue = appResult.firstPayback == null
+                        ? ParseRange(double.MaxValue, RiskScore_Payback_Value)
+                        : ParseRange(appResult.PaybackDays, RiskScore_Payback_Value);
+
+            var LTVtoCAC_Value = ParseRange(appResult.LTVtoCAC, RiskScore_LTVtoCAC_Value);
+
+            appResult.riskScore = paybackValue * RiskScore_Payback_Coefficient + LTVtoCAC_Value * RiskScore_LTVtoCAC_Coefficient;
+            appResult.riskRating = ParseRange(appResult.riskScore, RiskRating_RiskScore_Value);
+            appResult.riskTitle = RiskRatingTitle_Value.GetValueOrDefault(appResult.riskRating) ?? "Unknown";
+
+            return appResult;
         }
 
         public class CompanyResult
@@ -56,24 +71,11 @@ namespace Metrics_Analyzer.Processors
             public DateTime publishDate;
             public DateTime? firstPayback;
 
+            public double riskScore;
+            public double riskRating;
+            public string riskTitle;
+
             public double LTVtoCAC => LTV / CAC;
-
-            public double RiskRating => ParseRange(RiskScore, RiskRating_RiskScore_Value);
-            public string RiskRatingTitle => RiskRatingTitle_Value.GetValueOrDefault(RiskRating) ?? "Unknown";
-            public double RiskScore
-            {
-                get
-                {
-                    var paybackValue = firstPayback == null
-                        ? ParseRange(double.MaxValue, RiskScore_Payback_Value)
-                        : ParseRange(PaybackDays, RiskScore_Payback_Value);
-
-                    var LTVtoCAC_Value = ParseRange(LTVtoCAC, RiskScore_LTVtoCAC_Value);
-
-                    return paybackValue * RiskScore_Payback_Coefficient
-                        + LTVtoCAC_Value * RiskScore_LTVtoCAC_Coefficient;
-                }
-            }
 
             public int PaybackDays => firstPayback == null
                 ? -1
