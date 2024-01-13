@@ -15,7 +15,7 @@
 
  - Depends on your operation system open related folder.
  - Double click on the app file `Metrics-Analyzer`
- - Type command and press enter
+ - Type command and press enter (make sure `.csv` files are in the same folder as the app file)
  
  ```
  analyze app-companies app-financial-metrics
