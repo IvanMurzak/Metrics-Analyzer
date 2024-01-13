@@ -4,7 +4,7 @@
 ![___](https://img.shields.io/badge/CSV-blue.svg)
 ![___](https://img.shields.io/badge/Data_Analyzer-blue.svg)
 
-
+![WindowsTerminal_2ThUenHOUo](https://github.com/IvanMurzak/Metrics-Analyzer/assets/9135028/8d9b21e5-351e-4ccd-b9c2-1a7019104e16)
 
 ### Requirements
 
@@ -15,7 +15,7 @@
 
  - Depends on your operation system open related folder.
  - Double click on the app file `Metrics-Analyzer`
- - Type command and press enter
+ - Type command and press enter (make sure `.csv` files are in the same folder as the app file)
  
  ```
  analyze app-companies app-financial-metrics
@@ -37,3 +37,7 @@ Metrics-Analyzer analyze app-companies app-financial-metrics
 - `./Metrics-Analyzer/Data/CSV` models that represent CSV files.
 - `./Metrics-Analyzer/Processors` bunch of data processors.
 - `./Metrics-Analyzer/Program.cs` entry point into the app.
+
+## GPT - Metrics Analyzer app icon
+
+![app-icon](https://github.com/IvanMurzak/Metrics-Analyzer/assets/9135028/77dcbc3c-16be-4d3e-a450-8e8fa85d35ad)
