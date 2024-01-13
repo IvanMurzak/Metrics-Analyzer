@@ -4,7 +4,7 @@
 ![___](https://img.shields.io/badge/CSV-blue.svg)
 ![___](https://img.shields.io/badge/Data_Analyzer-blue.svg)
 
-
+![WindowsTerminal_2ThUenHOUo](https://github.com/IvanMurzak/Metrics-Analyzer/assets/9135028/8d9b21e5-351e-4ccd-b9c2-1a7019104e16)
 
 ### Requirements
 
