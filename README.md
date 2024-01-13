@@ -6,7 +6,7 @@
 
 ![WindowsTerminal_2ThUenHOUo](https://github.com/IvanMurzak/Metrics-Analyzer/assets/9135028/8d9b21e5-351e-4ccd-b9c2-1a7019104e16)
 
-Demo project. This is the solution for this [task](https://github.com/IvanMurzak/Metrics-Analyzer/blob/main/Sanlo%20Coding%20Challenge_%20Invest%20in%20App%20Company%20Revenues.pdf)
+Demo project. This is the solution for this [task](https://github.com/IvanMurzak/Metrics-Analyzer/blob/main/Sanlo%20Coding%20Challenge_%20Invest%20in%20App%20Company%20Revenues.pdf).
 
 ### Requirements
 
