@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Metrics_Analyzer.Data;
+namespace Metrics_Analyzer.Data.Runtime;
 
 public class AppTimestampData
 {

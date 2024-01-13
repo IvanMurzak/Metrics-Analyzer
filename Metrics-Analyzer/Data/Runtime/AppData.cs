@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Metrics_Analyzer.Data;
+namespace Metrics_Analyzer.Data.Runtime;
 
 public class AppData
 {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Metrics_Analyzer.Data;
+namespace Metrics_Analyzer.Data.Runtime;
 
 public class CompanyData
 {
