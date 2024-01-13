@@ -1,7 +1,6 @@
 ﻿using Metrics_Analyzer.Data.CSV;
 using Metrics_Analyzer.Processors;
 using NLog;
-using System.CommandLine;
 
 namespace Metrics_Analyzer.Data.Utils;
 
@@ -42,7 +41,7 @@ static internal class DataParser
 
             var app = company.apps.GetValueOrDefault(metric.app_name);
             if (app == null)
-                company.apps[metric.app_name] = app = new AppData(metric.app_name, new());
+                company.apps[metric.app_name] = app = new AppData(company.Id, company.Name, metric.app_name, new());
 
             app.Timestamps.Add(new AppTimestampData
             (
@@ -62,8 +61,8 @@ static internal class DataParser
             {
                 return new CSV_AppProcessResult
                 (
-                    company_id:   company.id,
-                    company_name: company.name,
+                    company_id:   app.companyId,
+                    company_name: app.companyName,
                     app_name:     app.name,
                     risk_score:   app.riskScore,
                     risk_rating:  app.riskRatingTitle
