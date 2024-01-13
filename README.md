@@ -4,7 +4,7 @@
 ![___](https://img.shields.io/badge/CSV-blue.svg)
 ![___](https://img.shields.io/badge/Data_Analyzer-blue.svg)
 
-![WindowsTerminal_2ThUenHOUo](https://github.com/IvanMurzak/Metrics-Analyzer/assets/9135028/8d9b21e5-351e-4ccd-b9c2-1a7019104e16)
+![Demo](https://github.com/IvanMurzak/Metrics-Analyzer/assets/9135028/8d9b21e5-351e-4ccd-b9c2-1a7019104e16)
 
 Demo project. This is the solution for this [task](https://github.com/IvanMurzak/Metrics-Analyzer/blob/main/Sanlo%20Coding%20Challenge_%20Invest%20in%20App%20Company%20Revenues.pdf). 
 
@@ -64,7 +64,7 @@ The project has two layers of models. The first one represents CSV format data. 
 
 The processing functions is here `AppProcessor.cs` line 25.
 
-Just because I convert CSV data to my Runtime data model that has much more efficient format for runtime performance. The complexity for exact data processing is `O(N)`. The data conversion takes another one `O(N)`, but I am not sure it should be calculated, because the conversion could be recognized as part of data reading, which one is not included in complecity calculation as I know. The most time consuming part of this app is `printing data to a console` in pretty tree formated way.
+Just because I convert CSV data to my Runtime data model that has much more efficient format for runtime performance. The complexity for exact data processing is `O(N)` + `O(N * log(N))` for quick sort. Total complexity is `O(N * log(N) + N)`. The data conversion takes another one `O(N)`, but I am not sure it should be calculated, because the conversion could be recognized as part of data reading, which one is not included in complecity calculation as I know. The most time consuming part of this app is `printing data to a console` in pretty tree formated way.
 
 If I had more time I would implement multithreaded solution that may increase perfromance for bigger data sets. Also, I would implement streaming data processing. That would reduce memory consumption. Because right now an entire data set should be loaded, processed, converted into result format and unloaded. That is a lot of RAM.
 
