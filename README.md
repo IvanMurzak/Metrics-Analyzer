@@ -37,3 +37,7 @@ Metrics-Analyzer analyze app-companies app-financial-metrics
 - `./Metrics-Analyzer/Data/CSV` models that represent CSV files.
 - `./Metrics-Analyzer/Processors` bunch of data processors.
 - `./Metrics-Analyzer/Program.cs` entry point into the app.
+
+## GPT - Metrics Analyzer app icon
+
+![app-icon](https://github.com/IvanMurzak/Metrics-Analyzer/assets/9135028/77dcbc3c-16be-4d3e-a450-8e8fa85d35ad)
