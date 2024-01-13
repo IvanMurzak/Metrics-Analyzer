@@ -4,36 +4,37 @@ using NLog;
 using NLog.Config;
 using NLog.Targets;
 
-namespace Metrics_Analyzer.Console;
-
-[Target("SpectreConsole")]
-internal class LogConsoleTarget : TargetWithLayout
+namespace Metrics_Analyzer.Console
 {
-    public LogConsoleTarget()
+    [Target("SpectreConsole")]
+    internal class LogConsoleTarget : TargetWithLayout
     {
-        Host = "localhost";
-    }
-
-    [RequiredParameter]
-    public string Host { get; set; }
-
-    protected override void Write(LogEventInfo logEvent)
-    {
-        string logMessage = RenderLogEvent(Layout, logEvent);
-        string hostName = RenderLogEvent(Host, logEvent);
-        SendTheMessageToRemoteHost(hostName, logMessage);
-    }
-
-    private void SendTheMessageToRemoteHost(string hostName, string message)
-    {
-        try
+        public LogConsoleTarget()
         {
-            AnsiConsole.MarkupLine(message);
+            Host = "localhost";
         }
-        catch (Exception e)
+
+        [RequiredParameter]
+        public string Host { get; set; }
+
+        protected override void Write(LogEventInfo logEvent)
         {
-            System.Console.WriteLine(e);
-            System.Console.WriteLine(message);
+            string logMessage = RenderLogEvent(Layout, logEvent);
+            string hostName = RenderLogEvent(Host, logEvent);
+            SendTheMessageToRemoteHost(hostName, logMessage);
+        }
+
+        private void SendTheMessageToRemoteHost(string hostName, string message)
+        {
+            try
+            {
+                AnsiConsole.MarkupLine(message);
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine(e);
+                System.Console.WriteLine(message);
+            }
         }
     }
 }

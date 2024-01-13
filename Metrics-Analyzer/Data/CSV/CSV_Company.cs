@@ -2,33 +2,34 @@
 using System.IO;
 using System.Linq;
 
-namespace Metrics_Analyzer.Data.CSV;
-
-internal class CSV_Company
+namespace Metrics_Analyzer.Data.CSV
 {
-    public int    company_id   { private set; get; }
-    public string company_name { private set; get; }
-    public string country_code { private set; get; }
-
-    public static List<CSV_Company> Parse(string filePath)
+    internal class CSV_Company
     {
-        if (!filePath.ToLower().EndsWith(".csv"))
-            filePath += ".csv";
+        public int    company_id   { private set; get; }
+        public string company_name { private set; get; }
+        public string country_code { private set; get; }
 
-        var csv = File.ReadAllText(filePath);
-        var lines = csv.Split(CSVUtils.LineSeparator);
+        public static List<CSV_Company> Parse(string filePath)
+        {
+            if (!filePath.ToLower().EndsWith(".csv"))
+                filePath += ".csv";
 
-        return lines.Skip(1) // skip header
-            .Select(line =>
-            {
-                var columns = line.Split(CSVUtils.ColumnSeparator);
-                return new CSV_Company
+            var csv = File.ReadAllText(filePath);
+            var lines = csv.Split(CSVUtils.LineSeparator);
+
+            return lines.Skip(1) // skip header
+                .Select(line =>
                 {
-                    company_id   = CSVUtils.ParseInt(columns[0]),
-                    company_name = CSVUtils.ParseString(columns[1]),
-                    country_code = CSVUtils.ParseString(columns[2])
-                };
-            })
-            .ToList();
+                    var columns = line.Split(CSVUtils.ColumnSeparator);
+                    return new CSV_Company
+                    {
+                        company_id   = CSVUtils.ParseInt(columns[0]),
+                        company_name = CSVUtils.ParseString(columns[1]),
+                        country_code = CSVUtils.ParseString(columns[2])
+                    };
+                })
+                .ToList();
+        }
     }
 }

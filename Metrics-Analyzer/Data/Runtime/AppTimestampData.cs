@@ -1,17 +1,18 @@
 ﻿using System;
 
-namespace Metrics_Analyzer.Data.Runtime;
-
-internal class AppTimestampData
+namespace Metrics_Analyzer.Data.Runtime
 {
-    public DateTime Date { private set; get; }
-    public double Revenue { private set; get; }
-    public double MarketingSpend { private set; get; }
-
-    public AppTimestampData(DateTime date, double revenue, double marketingSpend)
+    internal class AppTimestampData
     {
-        Date = date;
-        Revenue = revenue;
-        MarketingSpend = marketingSpend;
+        public DateTime Date { private set; get; }
+        public double Revenue { private set; get; }
+        public double MarketingSpend { private set; get; }
+
+        public AppTimestampData(DateTime date, double revenue, double marketingSpend)
+        {
+            Date = date;
+            Revenue = revenue;
+            MarketingSpend = marketingSpend;
+        }
     }
 }

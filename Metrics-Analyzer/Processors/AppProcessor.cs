@@ -3,87 +3,88 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Metrics_Analyzer.Processors;
-
-static partial class AppProcessor
+namespace Metrics_Analyzer.Processors
 {
-    public static List<CompanyResult> Process(IEnumerable<CompanyData> companies)
+    static partial class AppProcessor
     {
-        return companies.Select(company =>
+        public static List<CompanyResult> Process(IEnumerable<CompanyData> companies)
         {
-            return new CompanyResult
+            return companies.Select(company =>
             {
-                id = company.Id,
-                name = company.Name,
-                apps = company.apps.Values
-                    .Select(app => app.ProcessApp(company))
-                    .ToList()
-            };
-        }).ToList();
-    }
-
-    static AppResult ProcessApp(this AppData appData, CompanyData company)
-    {
-        var appResult = new AppResult()
-        {
-            companyId   = company.Id,
-            companyName = company.Name,
-            name        = appData.Name,
-            publishDate = appData.Timestamps[0].Date
-        };
-        foreach (var timestamp in appData.Timestamps)
-        {
-            if (appResult.CAC + timestamp.MarketingSpend <= 0)
-                continue; // ignoring timestamp while no marketing spend
-
-            appResult.LTV += timestamp.Revenue;
-            appResult.CAC += timestamp.MarketingSpend;
-
-            if (appResult.firstPayback == null && appResult.LTV >= appResult.CAC)
-            {
-                appResult.firstPayback = timestamp.Date;
-            }
+                return new CompanyResult
+                {
+                    id = company.Id,
+                    name = company.Name,
+                    apps = company.apps.Values
+                        .Select(app => app.ProcessApp(company))
+                        .ToList()
+                };
+            }).ToList();
         }
 
-        var paybackValue = appResult.firstPayback == null
-            ? ParseRange(double.MaxValue, RiskScore_Payback_Value)
-            : ParseRange(appResult.PaybackDays, RiskScore_Payback_Value);
+        static AppResult ProcessApp(this AppData appData, CompanyData company)
+        {
+            var appResult = new AppResult()
+            {
+                companyId   = company.Id,
+                companyName = company.Name,
+                name        = appData.Name,
+                publishDate = appData.Timestamps[0].Date
+            };
+            foreach (var timestamp in appData.Timestamps)
+            {
+                if (appResult.CAC + timestamp.MarketingSpend <= 0)
+                    continue; // ignoring timestamp while no marketing spend
 
-        var LTVtoCAC_Value = ParseRange(appResult.LTVtoCAC, RiskScore_LTVtoCAC_Value);
+                appResult.LTV += timestamp.Revenue;
+                appResult.CAC += timestamp.MarketingSpend;
 
-        appResult.riskScore = paybackValue * RiskScore_Payback_Coefficient + LTVtoCAC_Value * RiskScore_LTVtoCAC_Coefficient;
-        appResult.riskRating = ParseRange(appResult.riskScore, RiskRating_RiskScore_Value);
-        appResult.riskRatingTitle = RiskRatingTitle_Value.GetValueOrDefault(appResult.riskRating) ?? "Unknown";
+                if (appResult.firstPayback == null && appResult.LTV >= appResult.CAC)
+                {
+                    appResult.firstPayback = timestamp.Date;
+                }
+            }
 
-        return appResult;
-    }
+            var paybackValue = appResult.firstPayback == null
+                ? ParseRange(double.MaxValue, RiskScore_Payback_Value)
+                : ParseRange(appResult.PaybackDays, RiskScore_Payback_Value);
 
-    public class CompanyResult
-    {
-        public int id;
-        public string name;
-        public List<AppResult> apps;
-    }
-    public class AppResult
-    {
-        public int companyId;
-        public string companyName;
-        public string name;
+            var LTVtoCAC_Value = ParseRange(appResult.LTVtoCAC, RiskScore_LTVtoCAC_Value);
 
-        public double LTV;
-        public double CAC;
+            appResult.riskScore = paybackValue * RiskScore_Payback_Coefficient + LTVtoCAC_Value * RiskScore_LTVtoCAC_Coefficient;
+            appResult.riskRating = ParseRange(appResult.riskScore, RiskRating_RiskScore_Value);
+            appResult.riskRatingTitle = RiskRatingTitle_Value.GetValueOrDefault(appResult.riskRating) ?? "Unknown";
 
-        public DateTime publishDate;
-        public DateTime? firstPayback;
+            return appResult;
+        }
 
-        public double riskScore;
-        public double riskRating;
-        public string riskRatingTitle;
+        public class CompanyResult
+        {
+            public int id;
+            public string name;
+            public List<AppResult> apps;
+        }
+        public class AppResult
+        {
+            public int companyId;
+            public string companyName;
+            public string name;
 
-        public double LTVtoCAC => LTV / CAC;
+            public double LTV;
+            public double CAC;
 
-        public int PaybackDays => firstPayback == null
-            ? -1
-            : (firstPayback.Value - publishDate).Days;
+            public DateTime publishDate;
+            public DateTime? firstPayback;
+
+            public double riskScore;
+            public double riskRating;
+            public string riskRatingTitle;
+
+            public double LTVtoCAC => LTV / CAC;
+
+            public int PaybackDays => firstPayback == null
+                ? -1
+                : (firstPayback.Value - publishDate).Days;
+        }
     }
 }
