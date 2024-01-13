@@ -50,7 +50,7 @@ namespace Metrics_Analyzer.Processors
 
             appResult.riskScore = paybackValue * RiskScore_Payback_Coefficient + LTVtoCAC_Value * RiskScore_LTVtoCAC_Coefficient;
             appResult.riskRating = ParseRange(appResult.riskScore, RiskRating_RiskScore_Value);
-            appResult.riskTitle = RiskRatingTitle_Value.GetValueOrDefault(appResult.riskRating) ?? "Unknown";
+            appResult.riskRatingTitle = RiskRatingTitle_Value.GetValueOrDefault(appResult.riskRating) ?? "Unknown";
 
             return appResult;
         }
@@ -73,7 +73,7 @@ namespace Metrics_Analyzer.Processors
 
             public double riskScore;
             public double riskRating;
-            public string riskTitle;
+            public string riskRatingTitle;
 
             public double LTVtoCAC => LTV / CAC;
 

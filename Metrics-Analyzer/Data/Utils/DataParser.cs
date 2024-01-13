@@ -1,5 +1,7 @@
 ﻿using Metrics_Analyzer.Data.CSV;
+using Metrics_Analyzer.Processors;
 using NLog;
+using System.CommandLine;
 
 namespace Metrics_Analyzer.Data.Utils;
 
@@ -51,5 +53,22 @@ static internal class DataParser
         }
 
         return companies;
+    }
+    public static string ToCSV(List<AppProcessor.CompanyResult> input)
+    {
+        return CSV_AppProcessResult.ToCSV(input
+            .SelectMany(company => company.apps)
+            .Select(app =>
+            {
+                return new CSV_AppProcessResult
+                (
+                    company_id:   company.id,
+                    company_name: company.name,
+                    app_name:     app.name,
+                    risk_score:   app.riskScore,
+                    risk_rating:  app.riskRatingTitle
+                );
+            })
+            .ToList());
     }
 }
