@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Metrics_Analyzer.Processors
 {
-    static class AppProcessor
+    static partial class AppProcessor
     {
         public static List<CompanyResult> Process(IEnumerable<CompanyData> companies)
         {
@@ -52,16 +52,32 @@ namespace Metrics_Analyzer.Processors
 
             public double LTV;
             public double CAC;
-            public double riskRating;
-            public double riskScore;
 
             public DateTime publishDate;
             public DateTime? firstPayback;
 
+            public double LTVtoCAC => LTV / CAC;
+
+            public double RiskRating => ParseRange(RiskScore, RiskRating_RiskScore_Value);
+            public string RiskRatingTitle => RiskRatingTitle_Value.GetValueOrDefault(RiskRating) ?? "Unknown";
+            public double RiskScore
+            {
+                get
+                {
+                    var paybackValue = firstPayback == null
+                        ? ParseRange(double.MaxValue, RiskScore_Payback_Value)
+                        : ParseRange(PaybackDays, RiskScore_Payback_Value);
+
+                    var LTVtoCAC_Value = ParseRange(LTVtoCAC, RiskScore_LTVtoCAC_Value);
+
+                    return paybackValue * RiskScore_Payback_Coefficient
+                        + LTVtoCAC_Value * RiskScore_LTVtoCAC_Coefficient;
+                }
+            }
+
             public int PaybackDays => firstPayback == null
                 ? -1
                 : (firstPayback.Value - publishDate).Days;
-            public double LTVtoCAC => LTV / CAC;
         }
     }
 }

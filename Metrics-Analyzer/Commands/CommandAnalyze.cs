@@ -47,7 +47,6 @@ namespace Metrics_Analyzer.Commands
                             {
                                 Style = new Style(Color.Yellow)
                             };
-                            //tree.Style = new Style(Color.Yellow);
 
                             var treeApps = tree.AddNode($"[gold3_1]Owned apps ({companyResult.apps.Count}):[/]");
                             foreach (var app in companyResult.apps)
@@ -68,8 +67,8 @@ namespace Metrics_Analyzer.Commands
                                     treeApp.AddNode($"[skyblue2]Payback[/] ----- [green]{app.PaybackDays} days[/]. [gray]Happened at {app.firstPayback.Value.ToShortDateString()}[/]");
                                 }
 
-                                treeApp.AddNode($"[skyblue2]Risk rating[/] - [green]{app.riskRating}[/]");
-                                treeApp.AddNode($"[skyblue2]Risk score[/] -- [green]{app.riskScore}[/]");
+                                treeApp.AddNode($"[skyblue2]Risk rating[/] - [green]{app.RiskRating}[/] - [gray]{app.RiskRatingTitle}[/]");
+                                treeApp.AddNode($"[skyblue2]Risk score[/] -- [green]{app.RiskScore}[/]");
                             }
                             AnsiConsole.Write(tree);
                             AnsiConsole.WriteLine();
