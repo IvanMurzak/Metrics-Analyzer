@@ -24,5 +24,11 @@
                 return result;
             return 0;
         }
+        public static double ParseDouble(string str)
+        {
+            if (double.TryParse(str, out var result))
+                return result;
+            return 0;
+        }
     }
 }
