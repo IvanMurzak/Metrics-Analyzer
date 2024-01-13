@@ -27,8 +27,8 @@ namespace Metrics_Analyzer.Commands
 
                     try
                     {
-                        var companies = CSV_DataCompany.Parse(fileNameCompanies);
-                        var metrics = CSV_DataAppMetrics.Parse(fileNameMetrics);
+                        var companies = CSV_Company.Parse(fileNameCompanies);
+                        var metrics = CSV_AppMetrics.Parse(fileNameMetrics);
 
                         if (companies.Count == 0)
                         {

@@ -1,6 +1,6 @@
 ﻿namespace Metrics_Analyzer.Data.CSV
 {
-    internal class CSV_DataAppMetrics
+    internal class CSV_AppMetrics
     {
         public DateTime date            { private set; get; }
         public string   app_name        { private set; get; }
@@ -8,7 +8,7 @@
         public decimal  revenue         { private set; get; }
         public decimal  marketing_spend { private set; get; }
 
-        public static List<CSV_DataAppMetrics> Parse(string filePath)
+        public static List<CSV_AppMetrics> Parse(string filePath)
         {
             if (!filePath.ToLower().EndsWith(".csv"))
                 filePath += ".csv";
@@ -20,7 +20,7 @@
                 .Select(line =>
                 {
                     var columns = line.Split(CSVUtils.ColumnSeparator);
-                    return new CSV_DataAppMetrics
+                    return new CSV_AppMetrics
                     {
                         date            = CSVUtils.ParseDate    (columns[0]),
                         app_name        = CSVUtils.ParseString  (columns[1]),
