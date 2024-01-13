@@ -33,6 +33,9 @@ static partial class AppProcessor
         };
         foreach (var timestamp in appData.Timestamps)
         {
+            if (appResult.CAC + timestamp.MarketingSpend <= 0)
+                continue; // ignoring timestamp while no marketing spend
+
             appResult.LTV += timestamp.Revenue;
             appResult.CAC += timestamp.MarketingSpend;
 
