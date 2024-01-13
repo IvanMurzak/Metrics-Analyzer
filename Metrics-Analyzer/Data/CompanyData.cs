@@ -1,6 +1,6 @@
 ﻿namespace Metrics_Analyzer.Data;
 
-internal class CompanyData
+public class CompanyData
 {
     public int Id { private set; get; }
     public string Name { private set; get; }

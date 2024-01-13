@@ -1,6 +1,6 @@
 ﻿namespace Metrics_Analyzer.Data;
 
-internal class AppData
+public class AppData
 {
     public string Name { private set; get; }
     public List<AppTimestampData> Timestamps { private set; get; }

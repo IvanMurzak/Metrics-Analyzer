@@ -1,8 +1,8 @@
 ﻿namespace Metrics_Analyzer.Data;
 
-internal class AppTimestampData
+public class AppTimestampData
 {
-    public DateTime Date { private get; set; }
+    public DateTime Date { private set; get; }
     public double Revenue { private set; get; }
     public double MarketingSpend { private set; get; }
 
