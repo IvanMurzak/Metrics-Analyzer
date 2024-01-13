@@ -1,9 +1,4 @@
 ﻿using Metrics_Analyzer.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Metrics_Analyzer.Processors
 {
@@ -18,18 +13,20 @@ namespace Metrics_Analyzer.Processors
                     id = company.Id,
                     name = company.Name,
                     apps = company.apps.Values
-                        .Select(app => app.ProcessApp())
+                        .Select(app => app.ProcessApp(company))
                         .ToList()
                 };
             }).ToList();
         }
 
-        static AppResult ProcessApp(this AppData appData)
+        static AppResult ProcessApp(this AppData appData, CompanyData company)
         {
             var appResult = new AppResult()
             {
-                publishDate = appData.Timestamps[0].Date,
-                name = appData.Name
+                companyId   = company.Id,
+                companyName = company.Name,
+                name        = appData.Name,
+                publishDate = appData.Timestamps[0].Date
             };
             foreach (var timestamp in appData.Timestamps)
             {
@@ -63,6 +60,8 @@ namespace Metrics_Analyzer.Processors
         }
         public class AppResult
         {
+            public int companyId;
+            public string companyName;
             public string name;
 
             public double LTV;
