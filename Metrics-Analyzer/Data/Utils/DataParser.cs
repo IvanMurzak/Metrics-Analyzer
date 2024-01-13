@@ -61,6 +61,7 @@ static internal class DataParser
     {
         return CSV_AppProcessResult.ToCSV(input
             .SelectMany(company => company.apps)
+            .OrderByDescending(app => app.riskScore)
             .Select(app =>
             {
                 return new CSV_AppProcessResult

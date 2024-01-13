@@ -43,8 +43,8 @@ namespace Metrics_Analyzer.Processors
             }
 
             var paybackValue = appResult.firstPayback == null
-                        ? ParseRange(double.MaxValue, RiskScore_Payback_Value)
-                        : ParseRange(appResult.PaybackDays, RiskScore_Payback_Value);
+                ? ParseRange(double.MaxValue, RiskScore_Payback_Value)
+                : ParseRange(appResult.PaybackDays, RiskScore_Payback_Value);
 
             var LTVtoCAC_Value = ParseRange(appResult.LTVtoCAC, RiskScore_LTVtoCAC_Value);
 
