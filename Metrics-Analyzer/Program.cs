@@ -37,10 +37,6 @@ class Program
                     commandLine = commandLine.Substring(2);
                 if (commandLine.StartsWith("./"))
                     commandLine = commandLine.Substring(2);
-                if (commandLine.ToLower().StartsWith("eve-master.exe"))
-                    commandLine = commandLine.Substring(14);
-                if (commandLine.ToLower().StartsWith("eve-master"))
-                    commandLine = commandLine.Substring(10);
 
                 Task.Run(() => InvokeCommand
                 (
